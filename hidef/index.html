@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twarge &mdash; HiDeF</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style/style.css" />
+<link rel="alternate" href="/rss.xml" type="application/rss+xml" title="RSS" />
+
+</head>
+
+<body>
+<header>
+
+<!-- It's flattering that you'd be reading the source. Email hello@twarge.com to let us know you're this awesome. -->
+
+<nav>
+
+<input type="checkbox" id="togglenav" />
+<label for="togglenav" id="burger-wrapper">
+<span id="hamburger"></span>
+</label>
+
+<h1><a href="/">twarge</a></h1>
+
+<div id="menulist">
+
+<i>Free software tools</i>
+<ul>
+<li><a href="/typeset">Typeset</a></li>
+<!--
+<li><a href="/horizontal">Horizontal</a></li>
+-->
+<li><a href="/stairs">Stairs</a></li>
+<li><a href="/dexef">DeXeF</a></li>
+<li><a href="/hidef">HiDeF</a></li>
+</ul>
+
+<!--
+<i>Contact</i>
+<ul>
+<li><a href="mailto:Twarge%20<hello@twarge.com>?subject=Twarge">hello@twarge.com</a>
+</li>
+</ul>
+-->
+
+</div>
+
+</nav>
+
+</header>
+
+<main>
+<h1>HiDeF</h1>
+<p>HiDeF views HDF5 files on Apple devices. Open an <code>.h5</code> file and browse its groups and datasets in the sidebar, then read any dataset as a table, a plot, or an image — whichever suits the data. HiDeF only reads the part of a dataset you are looking at, so even multi-gigabyte files open immediately and stay responsive. It is free and open source, and built on the <a href="https://www.hdfgroup.org/solutions/hdf5/">HDF5 library</a>.</p>
+<p><img src="/hidef/HiDeF-macOS-Plot.avif" alt="HiDeF on macOS" /></p>
+<h2>Plots</h2>
+<p>Numeric datasets become plots. One- and two-column data is drawn as a line series; wider numeric data becomes a heatmap. Pan and zoom to explore — HiDeF resamples to the resolution of the view instead of drawing every point, so sweeping across millions of samples stays smooth. When a dataset carries a <code>time</code> or <code>sample_number</code> column, HiDeF uses it for the x axis automatically.</p>
+<h2>Tables</h2>
+<p>Any dataset can be read as a table. Rows load in bounded windows as you scroll, so the table appears at once no matter how long the dataset is. For datasets with more than two dimensions, a control along the top steps through the extra dimensions one slice at a time.</p>
+<h2>Images</h2>
+<p>Datasets shaped like pictures — a two-dimensional grid, or a grid of RGB or RGBA pixels — render as a proper image, scaled to fit the window.</p>
+<h2>Live data</h2>
+<p>HiDeF watches the file on disk and reloads when it changes, picking up rows as they are written. That makes it handy for watching a data logger fill a file in real time, not just for inspecting finished ones — and it holds your place, keeping the selected dataset, view, and zoom where you left them.</p>
+<h2>iPad</h2>
+<p>The same viewer runs on iPad and iPhone. Browse the hierarchy, scroll through tables, and pinch to zoom a plot.</p>
+<p><img src="/hidef/HiDeF-iPad.avif" alt="HiDeF on iPad" /></p>
+<h2>Support</h2>
+<p>Please discuss and register issues on GitHub.</p>
+
+</main>
+<footer>
+</footer>
+
+</body>
+
+</html>

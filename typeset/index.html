@@ -1,0 +1,122 @@
+<html>
+
+<head>
+<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twarge &mdash; Typeset</title>
+<link rel="stylesheet" type="text/css" media="all" href="/style/style.css" />
+<link rel="alternate" href="/rss.xml" type="application/rss+xml" title="RSS" />
+
+</head>
+
+<body>
+<header>
+
+<!-- It's flattering that you'd be reading the source. Email hello@twarge.com to let us know you're this awesome. -->
+
+<nav>
+
+<input type="checkbox" id="togglenav" />
+<label for="togglenav" id="burger-wrapper">
+<span id="hamburger"></span>
+</label>
+
+<h1><a href="/">twarge</a></h1>
+
+<div id="menulist">
+
+<i>Free software tools</i>
+<ul>
+<li><a href="/typeset">Typeset</a></li>
+<!--
+<li><a href="/horizontal">Horizontal</a></li>
+-->
+<li><a href="/stairs">Stairs</a></li>
+<li><a href="/dexef">DeXeF</a></li>
+<li><a href="/hidef">HiDeF</a></li>
+</ul>
+
+<!--
+<i>Contact</i>
+<ul>
+<li><a href="mailto:Twarge%20<hello@twarge.com>?subject=Twarge">hello@twarge.com</a>
+</li>
+</ul>
+-->
+
+</div>
+
+</nav>
+
+</header>
+
+<main>
+<h1>Typeset</h1>
+<p>Typeset compiles <a href="https://typst.app">Typst</a> documents on Apple devices. You can use the spectacular <a href="https://typst.app/universe/">universe of packages</a> to add content and style your documents. In addition to typst, Typeset integrates the <a href="https://github.com/Myriad-Dreamin/tinymist">Tinymist</a> language server for autocomplete and command signature hints. Typeset is completely free and open source and always will be. Typeset is unaffiliated with Typst.</p>
+<p><img src="/typeset/Typeset-macOS.avif" alt="Typeset on macOS" /></p>
+<p>A native Mac editor with your Typst source and a live PDF preview side by side. The preview keeps pace as you type, and clicking it jumps straight to the matching line of source.</p>
+<h2>Language server</h2>
+<p>Typeset embeds the <a href="https://github.com/Myriad-Dreamin/tinymist">Tinymist</a> language server, so the editor understands your document as you write it. Start typing and Typeset suggests the functions, parameters, and symbols that fit, including your own <code>#let</code> bindings and anything pulled in from a package.</p>
+<p><img src="/typeset/Typeset-macOS-Suggestion.avif" alt="Autocomplete suggestions in Typeset" /></p>
+<p>Call a function and a signature hint shows its parameters and their types, so you don't have to keep the documentation open in another window.</p>
+<p><img src="/typeset/Typeset-macOS-Signature.avif" alt="Function signature hints in Typeset" /></p>
+<h2>Sidebar</h2>
+<p>Flip the sidebar between your project's files, the document outline, and every label paired with a list of where it is referenced. The outline and reference list come straight from Tinymist, so they stay in step with your document.</p>
+<div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; align-items:flex-start; margin:1.5em 0;">
+  <figure style="flex:1 1 9em; max-width:11em; margin:0;">
+    <img src="/typeset/Typeset-macOS-Sidebar-Files.avif" alt="Files tab in the Typeset sidebar">
+    <figcaption style="text-align:center;">Files</figcaption>
+  </figure>
+  <figure style="flex:1 1 9em; max-width:11em; margin:0;">
+    <img src="/typeset/Typeset-macOS-Sidebar-Outline.avif" alt="Outline tab in the Typeset sidebar">
+    <figcaption style="text-align:center;">Outline</figcaption>
+  </figure>
+  <figure style="flex:1 1 9em; max-width:11em; margin:0;">
+    <img src="/typeset/Typeset-macOS-Sidebar-References.avif" alt="References tab in the Typeset sidebar">
+    <figcaption style="text-align:center;">References</figcaption>
+  </figure>
+</div>
+<p>Drag and drop files in, out, and reorgnaize. Drop images directly into the code.</p>
+<h2>Vertical</h2>
+<p>For vertical screens, Typeset can stack the views when the window gets narrow.</p>
+<div style="max-width:24em; margin:1.5em auto;">
+  <img src="/typeset/Typeset-macOS-Tall.avif" alt="Typeset in a tall macOS window with source stacked above the preview">
+</div>
+<h2>Log</h2>
+<p>When a compile fails, the log says what went wrong and where, so you can get back to writing.</p>
+<p><img src="/typeset/Typeset-macOS-Log.avif" alt="The Typeset compile log on macOS" /></p>
+<h2>No mystery meat</h2>
+<p>Typeset can edit and preview <code>.typ</code> files anywhere in your filesystem and should operate as the command-line Typst does. Typeset also identifies folders with a <code>.typeset</code> extension as a package that can be opened; this package format is required for iOS operation. The package contains nothing more than the files shown in the sidebar, a .typesetstate file and a .gitignore that ignores the former.</p>
+<p><img src="/typeset/Typeset-Document-Show-Contents.avif" alt="Showing the contents of a Typeset package" /></p>
+<p><img src="/typeset/Typeset-Document-Format.avif" alt="The Typeset document format" /></p>
+<h2>iPad</h2>
+<p>The app also fully functional on iPad:</p>
+<p><img src="/typeset/Typeset-iPad-Wide.avif" alt="Typeset on iPad" /></p>
+<div style="max-width:24em; margin:1.5em auto;">
+  <img src="/typeset/Typeset-iPad-Tall.avif" alt="Typeset on iPad held in portrait orientation">
+</div>
+<h2>iPhone</h2>
+<p>It all fits on iPhone, too. Write your document, preview, and manage the files in your package.</p>
+<div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; align-items:flex-start; margin:1.5em 0;">
+  <figure style="flex:1 1 12em; max-width:15em; margin:0;">
+    <img src="/typeset/Typeset-iPhone-Code.avif" alt="Editing Typst source on iPhone">
+    <figcaption style="text-align:center;">Code</figcaption>
+  </figure>
+  <figure style="flex:1 1 12em; max-width:15em; margin:0;">
+    <img src="/typeset/Typeset-iPhone-Preview.avif" alt="Full-screen document preview on iPhone">
+    <figcaption style="text-align:center;">Preview</figcaption>
+  </figure>
+  <figure style="flex:1 1 12em; max-width:15em; margin:0;">
+    <img src="/typeset/Typeset-iPhone-Files.avif" alt="Managing package files on iPhone">
+    <figcaption style="text-align:center;">Files</figcaption>
+  </figure>
+</div>
+<h2>Support</h2>
+<p>Please discuss and register issues on GitHub. If you're feeling generous, consider supporting <a href="https://typst.app/pricing/">Typst</a> directly by purchasing their web service or via <a href="https://github.com/sponsors/typst">GitHub Sponsor</a>.</p>
+
+</main>
+<footer>
+</footer>
+
+</body>
+
+</html>
