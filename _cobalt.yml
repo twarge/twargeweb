@@ -1,0 +1,13 @@
+source: source
+destination: public
+posts:
+  dir: posts
+  drafts_dir: drafts
+  rss: rss.xml
+site:
+  title: Twarge LLC
+  description: macOS Software
+  base_url: https://twarge.com
+  data: ~
+syntax_highlight:
+  enabled: false
