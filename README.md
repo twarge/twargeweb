@@ -17,3 +17,11 @@ And then navigate to http://localhost:1024 to view the site.
 Convert all images to AVIF using 
 
     magick mogrify -format avif -quality 85% *.heic
+
+Replace PNGs in the source tree with AVIF versions using
+
+    scripts/replace-source-pngs-with-avif.py
+
+Generate App Store-ready screenshots using
+
+    scripts/prepare-app-store-screenshots.py --clean
