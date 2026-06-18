@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replace PNG images under source/ with AVIF versions."""
+"""Replace PNG images under source/ with AVIF versions, excluding favicons."""
 
 from __future__ import annotations
 
@@ -12,7 +12,10 @@ from pathlib import Path
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Convert every PNG under source/ to AVIF and remove the PNG after success."
+        description=(
+            "Convert PNGs under source/ to AVIF and remove each PNG after success, "
+            "excluding favicon files."
+        )
     )
     parser.add_argument(
         "--source",
@@ -52,11 +55,15 @@ def require_magick() -> str:
     return magick
 
 
+def is_favicon(path: Path) -> bool:
+    return path.suffix.lower() == ".png" and path.stem.lower().startswith("favicon")
+
+
 def png_sources(source_dir: Path) -> list[Path]:
     return sorted(
         path
         for path in source_dir.rglob("*")
-        if path.is_file() and path.suffix.lower() == ".png"
+        if path.is_file() and path.suffix.lower() == ".png" and not is_favicon(path)
     )
 
 
