@@ -5,6 +5,12 @@ title: DeXeF
 
 # DeXeF
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/dexef/id6781488401?mt=12">
+    <img class="appstore-badge" alt="Download DeXeF on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 DeXeF views DXF files on Apple devices. Open a drawing and pan, zoom, and read off coordinates against a reference grid, with every layer just a toggle away. On macOS, DeXeF also provides Quick Look previews and Finder thumbnails, so you can peek at a DXF file without opening the app.
 
 ![DeXeF on macOS](/{{page.file.parent}}/DeXeF-macOS.avif)
@@ -33,4 +39,4 @@ It fits on iPhone, too. The drawing fills the screen edge to edge, the grid read
 
 ## Support
 
-Please discuss and register issues on GitHub.
+Please discuss and register issues on [GitHub](https://github.com/twarge/dexef).

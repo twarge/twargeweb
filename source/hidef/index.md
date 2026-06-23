@@ -5,6 +5,12 @@ title: HiDeF
 
 # HiDeF
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/highdef/id6781456671?mt=12">
+    <img class="appstore-badge" alt="Download HiDeF on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 HiDeF views HDF5 files on Apple devices. Open an `.h5` file and browse its groups and datasets in the sidebar, then read any dataset as a table, a plot, or an image — whichever suits the data. HiDeF only reads the part of a dataset you are looking at, so even multi-gigabyte files open immediately and stay responsive. It is free and open source, and built on the [HDF5 library](https://www.hdfgroup.org/solutions/hdf5/).
 
 ![HiDeF on macOS](/{{page.file.parent}}/HiDeF-macOS-Plot.avif)
@@ -33,4 +39,4 @@ The same viewer runs on iPad and iPhone. Browse the hierarchy, scroll through ta
 
 ## Support
 
-Please discuss and register issues on GitHub.
+Please discuss and register issues on [GitHub](https://github.com/twarge/hidef).

@@ -289,6 +289,14 @@ footer .selected {
     box-shadow: none;
 }
 
+.appstore-badge {
+    display: inline-block;
+    width: auto;
+    height: 2.75em;
+    margin: 0.5em 0 1.5em 0;
+    box-shadow: none;
+}
+
 /* Header */
 
 /* Footer and hamburger are displayed on mobile only */
