@@ -5,6 +5,12 @@ title: Typeset
 
 # Typeset
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/typeset-typst/id6781494180?mt=12">
+    <img class="appstore-badge" alt="Download Typeset on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 Typeset compiles [Typst](https://typst.app) documents on Apple devices. You can use the spectacular [universe of packages](https://typst.app/universe/) to add content and style your documents. In addition to typst, Typeset integrates the [Tinymist](https://github.com/Myriad-Dreamin/tinymist) language server for autocomplete and command signature hints. Typeset is completely free and open source and always will be. Typeset is unaffiliated with Typst.
 
 ![Typeset on macOS](/{{page.file.parent}}/Typeset-macOS.avif)
@@ -95,4 +101,4 @@ It all fits on iPhone, too. Write your document, preview, and manage the files i
 
 ## Support
 
-Please discuss and register issues on GitHub. If you're feeling generous, consider supporting [Typst](https://typst.app/pricing/) directly by purchasing their web service or via [GitHub Sponsor](https://github.com/sponsors/typst).
+Please discuss and register issues on [GitHub](https://github.com/twarge/typeset). If you're feeling generous, consider supporting [Typst](https://typst.app/pricing/) directly by purchasing their web service or via [GitHub Sponsor](https://github.com/sponsors/typst).

@@ -5,6 +5,12 @@ title: Stairs
 
 # Stairs
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/stairstep/id6781493653?mt=12">
+    <img class="appstore-badge" alt="Download Stairs on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 Stairs views STEP files. Open a model and inspect it in 3D — orbit, pan, and zoom, with a reference grid and a scale bar to keep track of size. On macOS, Stairs also provides Quick Look previews and Finder thumbnails, so you can peek at a STEP file without opening the app.
 
 ![Stairs on macOS](/{{page.file.parent}}/Stairs-macOS.avif)
@@ -27,4 +33,4 @@ It fits on iPhone, too. The model fills the screen edge to edge, and the inspect
 
 ## Support
 
-Please discuss and register issues on GitHub.
+Please discuss and register issues on [GitHub](https://github.com/twarge/stairs).
