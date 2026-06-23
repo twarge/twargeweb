@@ -4,7 +4,8 @@
 The script scans product folders under source/ for screenshot images, resizes
 each screenshot down to the nearest accepted App Store canvas, then centers it
 on that canvas. macOS screenshots keep transparent margins. iPhone and iPad
-screenshots use white margins because App Store Connect rejects transparency.
+screenshots use white margins, and watchOS screenshots use black margins,
+because App Store Connect rejects transparency for those platforms.
 """
 
 from __future__ import annotations
@@ -21,6 +22,15 @@ APP_STORE_SIZES = {
     "macos": [(1280, 800), (1440, 900), (2560, 1600), (2880, 1800)],
     "iphone": [(1242, 2688), (2688, 1242), (1284, 2778), (2778, 1284)],
     "ipad": [(2064, 2752), (2752, 2064), (2048, 2732), (2732, 2048)],
+    "watchos": [(422, 514), (410, 502), (416, 496), (396, 484), (368, 448), (312, 390)],
+}
+
+# Platforms that App Store Connect requires to be opaque, and the margin color
+# used to fill the canvas around each centered screenshot.
+BACKGROUND_COLORS = {
+    "iphone": "white",
+    "ipad": "white",
+    "watchos": "black",
 }
 
 IMAGE_EXTENSIONS = {".avif", ".heic", ".jpg", ".jpeg", ".png", ".tif", ".tiff"}
@@ -73,6 +83,8 @@ def screenshot_sources(input_dir: Path) -> list[Path]:
 
 def platform_from_path(path: Path) -> str:
     searchable_name = " ".join(part.lower() for part in path.parts)
+    if "watch" in searchable_name:
+        return "watchos"
     if "iphone" in searchable_name:
         return "iphone"
     if "ipad" in searchable_name:
@@ -134,7 +146,7 @@ def output_path(output_dir: Path, source: Path, target: tuple[int, int]) -> Path
 
 def convert_screenshot(magick: str, source: Path, output: Path, platform: str, target: tuple[int, int]) -> None:
     target_width, target_height = target
-    background = "white" if platform in {"iphone", "ipad"} else "none"
+    background = BACKGROUND_COLORS.get(platform, "none")
     output.parent.mkdir(parents=True, exist_ok=True)
 
     command = [
@@ -152,7 +164,7 @@ def convert_screenshot(magick: str, source: Path, output: Path, platform: str, t
         f"{target_width}x{target_height}",
     ]
 
-    if platform in {"iphone", "ipad"}:
+    if platform in BACKGROUND_COLORS:
         command.extend(["-alpha", "remove", "-alpha", "off"])
 
     command.append(str(output))
@@ -182,7 +194,7 @@ def main() -> int:
         width, height = image_size(magick, source)
         target = choose_target(platform, width, height)
         output = output_path(output_dir, source, target)
-        background = "white" if platform in {"iphone", "ipad"} else "transparent"
+        background = BACKGROUND_COLORS.get(platform, "transparent")
         print(
             f"{source} -> {output} "
             f"({platform}, {width}x{height} -> {target[0]}x{target[1]}, {background})"
