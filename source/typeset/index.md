@@ -48,6 +48,13 @@ Flip the sidebar between your project's files, the document outline, and every l
 
 Drag and drop files in, out, and reorgnaize. Drop images directly into the code.  
 
+## Distraction-free mode
+
+It is possible to remove the window chrome by selecting the distraction-free mode. The toolbar and window controls return when the cursor hovers over the toobar area.
+
+![Distraction-free mode](/{{page.file.parent}}/Typeset-macOS-DistractionFree.avif)
+
+
 ## Vertical
 
 For vertical screens, Typeset can stack the views when the window gets narrow.
