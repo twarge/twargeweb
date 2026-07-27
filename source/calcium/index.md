@@ -115,7 +115,7 @@ title: Calcium
     <span class="dot dot-close"></span>
     <span class="dot dot-minimize"></span>
     <span class="dot dot-zoom"></span>
-    <span class="doc-title">road trip.calcium — edit me</span>
+    <span class="doc-title">Calcium Demo.calcium — Edit me!</span>
   </div>
   <div class="calcium-frame">
     <div class="backdrop" id="backdrop"></div>
@@ -126,14 +126,3 @@ title: Calcium
 </div>
 
 <script type="module" src="/{{page.file.parent}}/calcium.js"></script>
-
-Calcium is a text editor that loves math. Write prose and calculations in one
-plain-text document; everything after `=>` is computed as you type, and the
-answers are part of the file. The window above is real — edit anything in it,
-and every answer follows. The same Rust engine runs it here in your browser,
-compiled to WebAssembly, and in the native macOS and iOS apps.
-
-Units are ordinary algebra, so `88 mph in km/hour` just works, dimensional
-errors surface as errors rather than wrong numbers, and you can define your
-own units in a single line. It is also a symbolic calculator: leave a variable
-undefined and Calcium solves for it, quadratics included.
