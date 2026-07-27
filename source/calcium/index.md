@@ -1,0 +1,139 @@
+---
+layout: default.liquid
+title: Calcium
+---
+
+# Calcium
+
+<style>
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/firacode/FiraCode-Regular.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/firacode/FiraCode-Bold.woff2") format("woff2");
+  }
+
+  /* A Mac window, faked: the demo sits in it live. */
+  .calcium-window {
+    max-width: 720px;
+    margin: 2em auto;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+  .calcium-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: linear-gradient(#f6f6f6, #efefef);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  }
+  .calcium-titlebar .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+  }
+  .dot-close    { background: #ff5f57; }
+  .dot-minimize { background: #febc2e; }
+  .dot-zoom     { background: #28c840; }
+  .calcium-titlebar .doc-title {
+    flex: 1;
+    text-align: center;
+    /* Balance the traffic lights so the title truly centres. */
+    margin-right: 52px;
+    font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #6e6e73;
+  }
+  /* No internal scrolling: the backdrop flows and gives the window its
+     height, the textarea overlays it exactly, and the page's own scrollbar
+     does the rest. The two stay the same height because they render the same
+     text and the backdrop repaints on every keystroke. */
+  .calcium-frame {
+    position: relative;
+  }
+  .calcium-frame .backdrop,
+  .calcium-frame textarea {
+    box-sizing: border-box;
+    margin: 0;
+    border: none;
+    padding: 22px 26px;
+    font: 14px/1.5 "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-variant-ligatures: contextual;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: transparent;
+  }
+  .calcium-frame .backdrop {
+    color: #1d1d1f;
+    pointer-events: none;
+    min-height: 8em;
+  }
+  .calcium-frame textarea {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: transparent;
+    caret-color: #1d1d1f;
+    outline: none;
+    resize: none;
+  }
+  .calcium-frame .prose   { color: #86868b; }
+  .calcium-frame .heading { font-weight: 700; }
+  .calcium-frame .comment { color: #61788f; }
+  .calcium-frame .answer  { color: #86868b; }
+  .calcium-frame .error   { color: #d0342c; }
+  .calcium-frame .redef {
+    text-decoration: underline wavy #e58900 1px;
+    text-underline-offset: 3px;
+  }
+  .calcium-frame .tok-num { color: #0f6bd8; }
+  .calcium-frame .tok-str { color: #8a5a00; }
+  .calcium-frame .tok-kw  { color: #8a3fc9; }
+  .calcium-frame .tok-fn  { color: #d63384; }
+  .calcium-frame .tok-def { color: #0e8377; }
+  .calcium-frame .tok-dir { color: #8a3fc9; }
+  .calcium-frame .tok-op  { color: #86868b; }
+  .calcium-frame .loading {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    color: #86868b; font: 13px ui-monospace, monospace;
+  }
+</style>
+
+<div class="calcium-window">
+  <div class="calcium-titlebar">
+    <span class="dot dot-close"></span>
+    <span class="dot dot-minimize"></span>
+    <span class="dot dot-zoom"></span>
+    <span class="doc-title">road trip.calcium — edit me</span>
+  </div>
+  <div class="calcium-frame">
+    <div class="backdrop" id="backdrop"></div>
+    <textarea id="editor" spellcheck="false" autocapitalize="off"
+              autocomplete="off" autocorrect="off"></textarea>
+    <div class="loading" id="loading">loading the engine…</div>
+  </div>
+</div>
+
+<script type="module" src="/{{page.file.parent}}/calcium.js"></script>
+
+Calcium is a text editor that loves math. Write prose and calculations in one
+plain-text document; everything after `=>` is computed as you type, and the
+answers are part of the file. The window above is real — edit anything in it,
+and every answer follows. The same Rust engine runs it here in your browser,
+compiled to WebAssembly, and in the native macOS and iOS apps.
+
+Units are ordinary algebra, so `88 mph in km/hour` just works, dimensional
+errors surface as errors rather than wrong numbers, and you can define your
+own units in a single line. It is also a symbolic calculator: leave a variable
+undefined and Calcium solves for it, quadratics included.
