@@ -73,4 +73,4 @@ Geomagnetic runs on Apple Watch as a standalone app — your observatory's field
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/observatory).
+Please discuss and register issues on [GitHub](https://github.com/twarge/geomagnetic).
