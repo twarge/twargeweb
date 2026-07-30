@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Install Cobalt
         run: |
@@ -41,9 +41,11 @@ jobs:
         run: ${{ env.COBALT_BIN }} build
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: public
+          # v4+ excludes dotfiles by default; keep .well-known etc. deployable
+          include-hidden-files: true
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -55,4 +57,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
