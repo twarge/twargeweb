@@ -24,4 +24,16 @@ Replace PNGs in the source tree with AVIF versions using
 
 Generate App Store-ready screenshots using
 
-    scripts/prepare-app-store-screenshots.py --clean
+    scripts/prepare-app-store-screenshots.py
+
+Both scripts only do the work that is needed: images already converted are left
+alone, and an output older than its source is regenerated. Add `--dry-run` to
+see what would change, `--force` to redo everything anyway, or `--clean` to
+empty the screenshot output directory first.
+
+Device screenshots exported with white around the device edge get that white
+made transparent during AVIF conversion, so they sit on the page background
+rather than on a white block. Only white connected to the outside edge is
+cleared, so a white document inside the device stays white. Use `--keep-white`
+to leave the surround alone, or `--white-fuzz` to change how much of the
+anti-aliased edge is taken (10% by default).

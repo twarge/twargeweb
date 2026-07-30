@@ -72,11 +72,17 @@ title: Calcium
     word-wrap: break-word;
     background: transparent;
   }
+  /* The backdrop paints above the textarea, pointer-transparent, so its
+     anchors are clickable; the caret draws beneath and shows through. */
   .calcium-frame .backdrop {
     color: #1d1d1f;
     pointer-events: none;
     min-height: 8em;
+    position: relative;
+    z-index: 1;
   }
+  .calcium-frame .backdrop a { color: #0f6bd8; pointer-events: auto; }
+  .calcium-frame .backdrop .dim { color: #86868b; opacity: 0.7; }
   .calcium-frame textarea {
     position: absolute;
     inset: 0;
@@ -87,6 +93,7 @@ title: Calcium
     caret-color: #1d1d1f;
     outline: none;
     resize: none;
+    z-index: 0;
   }
   .calcium-frame .prose   { color: #86868b; }
   .calcium-frame .heading { font-weight: 700; }

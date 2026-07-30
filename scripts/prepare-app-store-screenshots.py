@@ -6,6 +6,10 @@ each screenshot down to the nearest accepted App Store canvas, then centers it
 on that canvas. macOS screenshots keep transparent margins. iPhone and iPad
 screenshots use white margins, and watchOS screenshots use black margins,
 because App Store Connect rejects transparency for those platforms.
+
+Only the work that is actually needed runs: a screenshot whose generated PNG is
+already newer than its source is left untouched, so a second run over an
+unchanged source/ tree writes nothing. Pass --force to regenerate everything.
 """
 
 from __future__ import annotations
@@ -56,6 +60,11 @@ def parse_args() -> argparse.Namespace:
         "--clean",
         action="store_true",
         help="Remove the output directory before generating screenshots.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Regenerate screenshots, even where the existing output is up to date.",
     )
     parser.add_argument(
         "--dry-run",
@@ -144,6 +153,31 @@ def output_path(output_dir: Path, source: Path, target: tuple[int, int]) -> Path
     return output_dir / product_folder / f"{source.stem}-appstore-{target_width}x{target_height}.png"
 
 
+def existing_outputs(output_dir: Path, source: Path) -> list[Path]:
+    """Return screenshots already generated from this source, at any canvas size."""
+    product_dir = output_dir / source.parent.name
+    if not product_dir.is_dir():
+        return []
+
+    prefix = f"{source.stem}-appstore-"
+    return sorted(
+        path
+        for path in product_dir.iterdir()
+        if path.is_file() and path.suffix.lower() == ".png" and path.name.startswith(prefix)
+    )
+
+
+def is_up_to_date(source: Path, outputs: list[Path]) -> bool:
+    """True when exactly one output exists for this source and it is no older.
+
+    More than one match means an earlier run chose a different canvas size, so
+    the superseded file still needs clearing out.
+    """
+    if len(outputs) != 1:
+        return False
+    return outputs[0].stat().st_mtime >= source.stat().st_mtime
+
+
 def convert_screenshot(magick: str, source: Path, output: Path, platform: str, target: tuple[int, int]) -> None:
     target_width, target_height = target
     background = BACKGROUND_COLORS.get(platform, "none")
@@ -189,7 +223,17 @@ def main() -> int:
     if args.clean and output_dir.exists() and not args.dry_run:
         shutil.rmtree(output_dir)
 
+    generated = 0
+    skipped = 0
+
     for source in sources:
+        outputs = existing_outputs(output_dir, source)
+
+        if is_up_to_date(source, outputs) and not args.force:
+            skipped += 1
+            print(f"skip: {outputs[0].name} is already up to date")
+            continue
+
         platform = platform_from_path(source)
         width, height = image_size(magick, source)
         target = choose_target(platform, width, height)
@@ -199,9 +243,30 @@ def main() -> int:
             f"{source} -> {output} "
             f"({platform}, {width}x{height} -> {target[0]}x{target[1]}, {background})"
         )
-        if not args.dry_run:
-            convert_screenshot(magick, source, output, platform, target)
 
+        # An earlier run may have picked a different canvas for this screenshot.
+        # Leaving both behind would upload two copies of the same shot.
+        superseded = [path for path in outputs if path != output]
+        for path in superseded:
+            print(f"  removing superseded {path.name}")
+
+        generated += 1
+        if args.dry_run:
+            continue
+
+        convert_screenshot(magick, source, output, platform, target)
+        for path in superseded:
+            path.unlink()
+
+    if args.dry_run:
+        print(f"Dry run complete: {generated} to generate, {skipped} already up to date.")
+        return 0
+
+    if not generated:
+        print(f"Nothing to do: {skipped} screenshot(s) already up to date.")
+        return 0
+
+    print(f"Complete: {generated} generated, {skipped} skipped.")
     return 0
 
 

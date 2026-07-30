@@ -11,7 +11,7 @@ title: Typeset
   </a>
 </p>
 
-Typeset compiles [Typst](https://typst.app) documents on Apple devices. You can use the spectacular [universe of packages](https://typst.app/universe/) to add content and style your documents. In addition to typst, Typeset integrates the [Tinymist](https://github.com/Myriad-Dreamin/tinymist) language server for autocomplete and command signature hints. Typeset is completely free and open source and always will be. Typeset is unaffiliated with Typst.
+Typeset compiles [Typst](https://typst.app) documents on Apple devices. You can use the spectacular [universe of packages](https://typst.app/universe/) to add content and style your documents. In addition to typst, Typeset integrates a powerful Typst language server for autocomplete and command signature hints. Typeset is completely free and open source and always will be. Typeset is unaffiliated with Typst.
 
 ![Typeset on macOS](/{{page.file.parent}}/Typeset-macOS.avif)
 
@@ -19,7 +19,7 @@ A native Mac editor with your Typst source and a live PDF preview side by side. 
 
 ## Language server
 
-Typeset embeds the [Tinymist](https://github.com/Myriad-Dreamin/tinymist) language server, so the editor understands your document as you write it. Start typing and Typeset suggests the functions, parameters, and symbols that fit, including your own `#let` bindings and anything pulled in from a package.
+Typeset embeds a powerful Typst language server, so the editor understands your document as you write it. Start typing and Typeset suggests the functions, parameters, and symbols that fit, including your own `#let` bindings and anything pulled in from a package.
 
 ![Autocomplete suggestions in Typeset](/{{page.file.parent}}/Typeset-macOS-Suggestion.avif)
 
@@ -29,7 +29,7 @@ Call a function and a signature hint shows its parameters and their types, so yo
 
 ## Sidebar
 
-Flip the sidebar between your project's files, the document outline, and every label paired with a list of where it is referenced. The outline and reference list come straight from Tinymist, so they stay in step with your document. 
+Flip the sidebar between your project's files, the document outline, and every label paired with a list of where it is referenced. The outline and reference list come straight from the language server, so they stay in step with your document. 
 
 <div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; align-items:flex-start; margin:1.5em 0;">
   <figure style="flex:1 1 9em; max-width:11em; margin:0;">
