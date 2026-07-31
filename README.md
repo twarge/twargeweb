@@ -37,3 +37,12 @@ rather than on a white block. Only white connected to the outside edge is
 cleared, so a white document inside the device stays white. Use `--keep-white`
 to leave the surround alone, or `--white-fuzz` to change how much of the
 anti-aliased edge is taken (10% by default).
+
+## License
+
+Copyright 2026 Twarge LLC. Licensed under the Apache License, Version 2.0; see
+[LICENSE](LICENSE) or https://www.apache.org/licenses/LICENSE-2.0.
+
+Bundled third-party assets keep their own licenses: Fira Code
+(`source/fonts/firacode/LICENSE-FiraCode.txt`) and Libertinus
+(`source/fonts/libertinus/OFL.txt`) are both under the SIL Open Font License.
