@@ -36,14 +36,20 @@ Most of Zulip is here: topics and channels, reactions, polls and to-do lists, me
 
 Zephyr keeps a local archive of your messages and reads it first. Open the app on a plane and your conversations are there; search runs against the local index; anything you send queues and goes out when the network returns (not when you realize you need to press a retry button). When the connection is flaky, views render instantly from the archive instead of waiting on a timeout.
 
+## Search
+
+One field does both jobs. Typing filters what you're looking at — channels and topics narrow with every keystroke, so most of the time you land on the conversation before finishing the word. As you type, Zulip's search operators are offered as tokens: a sender, a channel, messages with links or attachments.
+
 <div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; margin:1.5em 0;">
   <img style="flex:1 1 16em; min-width:14em; max-width:26em; align-self:flex-start;"
        src="/{{page.file.parent}}/Zephyr-iPad-Search1.avif"
-       alt="Zephyr search suggestions with Zulip's search operators">
+       alt="Typing in Zephyr's search field filters channels and topics live, with Zulip's search operators offered as tokens">
   <img style="flex:1 1 16em; min-width:14em; max-width:26em; align-self:flex-start;"
        src="/{{page.file.parent}}/Zephyr-iPad-Search2.avif"
-       alt="Zephyr full-text search results">
+       alt="Zephyr's search results view after pressing Return, showing matching messages across history">
 </div>
+
+Hit Return and the same text becomes a real search: a results view over your message history, matches highlighted, each one a click from its full conversation. Recent searches stay in the sidebar for next time.
 
 ## Multiple servers
 
@@ -55,7 +61,7 @@ You can drive from the keyboard: jump anywhere with Open Quickly, walk messages 
 
 ## iPhone
 
-It fits in your pocket, too — the same channels, conversations, and search, in a layout tuned for one hand.
+The same channels, conversations, and search, on iPhone.
 
 <div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; margin:1.5em 0;">
   <img style="flex:1 1 11em; min-width:10em; max-width:16em; align-self:flex-start;"
