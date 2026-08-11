@@ -38,3 +38,5 @@ An Ocean Optics HR4000 or HR4000CG connected by USB, and macOS 14 or later.
 Samundra is free and open source under the Apache 2.0 licence. Please discuss and register issues on [GitHub](https://github.com/twarge/samundra).
 
 Atomic line identifications use data extracted from the [NIST Atomic Spectra Database](https://physics.nist.gov/asd): Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team, National Institute of Standards and Technology.
+
+Samundra is an independent product and is not affiliated with, endorsed by, or sponsored by Ocean Optics.
