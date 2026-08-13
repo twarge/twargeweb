@@ -5,11 +5,13 @@ title: Profiler
 
 # Profiler
 
-Profiler is a laser beam profiler for macOS and iPadOS that uses a Sony α7C — or any UVC camera — as the sensor. Connect a camera and the window shows the live beam with horizontal and vertical profiles, ISO 11146 second-moment widths, centroid, ellipticity and azimuth. It is free and open source.
+Profiler is a laser beam profiler for macOS and iPadOS that uses any PTP webcam as the sensor. Connect a camera and the window shows the live beam with horizontal and vertical profiles, ISO 11146 second-moment widths, centroid, ellipticity and azimuth. It is free and open source.
 
 ![Profiler on macOS](/{{page.file.parent}}/Profiler-macOS.avif)
 
-Inputs are on the left, measurements on the right, so it is always clear which numbers you set and which the camera reports. The horizontal profile sits above the image and the vertical profile beside it, sharing the image's extent and one amplitude scale.
+Inputs are on the left, measurements on the right. The horizontal profile sits above the image and the vertical profile beside it, sharing the image's extent and one amplitude scale.
+
+Tested with a Sony α7C, but should work with any camera that provides a video source, PTP or UVC.
 
 ## Features
 
@@ -34,10 +36,6 @@ macOS 14 or later, or iPadOS 17 or later. A Sony α7C connected by USB in PC Rem
 
 On macOS, set Image Capture's *Connecting this camera opens:* to **No application** and quit Photos first. PTP allows one session per device, so anything else holding the camera blocks Profiler.
 
-The iPad build analyses correctly, but its camera path has not yet been tested against real hardware.
-
 ## Support
 
 Profiler is free and open source under the Apache 2.0 licence. Please discuss and register issues on [GitHub](https://github.com/twarge/profiler).
-
-Profiler is an independent product and is not affiliated with, endorsed by, or sponsored by Sony.
