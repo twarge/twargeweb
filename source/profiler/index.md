@@ -28,7 +28,7 @@ Tested with a Sony α7C, but should work with any camera that provides a video s
 - Share exports the beam image as PNG, both profiles as CSV, and the metrics as JSON; the image and either profile chart also drag straight out of the window
 - Settings are stored per camera, keyed to the device, because µm/pixel describes the optical setup rather than a global preference
 
-![Profiler on iPadOS](/{{page.file.parent}}/Profiler-iOS.avif)
+![Profiler on iPadOS](/{{page.file.parent}}/Profiler-iPad.avif)
 
 ## Requirements
 
