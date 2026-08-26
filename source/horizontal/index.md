@@ -5,6 +5,12 @@ title: Horizontal
 
 # Horizontal
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/horizontal-pcb/id6781505835?mt=12">
+    <img class="appstore-badge" alt="Download Horizontal on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 > Horizontal is a work in progress. It is not finished software and should not be used for production work. Keep backups of anything you open with it.
 
 Horizontal is a PCB design tool for macOS and iPadOS. It opens `.hprj` and `.horizontal` projects and shows the schematic and the board.
@@ -29,4 +35,4 @@ On macOS, Quick Look previews and Finder thumbnails let you look at a project wi
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/horizontal).
+Please discuss and register issues on [GitHub](https://github.com/twarge/horizontal/issues).

@@ -39,4 +39,4 @@ The same viewer runs on iPad and iPhone. Browse the hierarchy, scroll through ta
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/hidef).
+Please discuss and register issues on [GitHub](https://github.com/twarge/hidef/issues).

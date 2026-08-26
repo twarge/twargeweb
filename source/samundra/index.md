@@ -5,14 +5,11 @@ title: Samundra
 
 # Samundra
 
-<!--
-App Store badge — uncomment and set the app's ID once Samundra is published.
 <p style="text-align:center;">
-  <a href="https://apps.apple.com/us/app/samundra/idXXXXXXXXXX?mt=12">
+  <a href="https://apps.apple.com/us/app/samundra/id6800133831?mt=12">
     <img class="appstore-badge" alt="Download Samundra on the App Store" src="/img/app-store-badge.svg">
   </a>
 </p>
--->
 
 Samundra reads Ocean Optics HR4000 spectrometers, including the HR4000CG, on macOS. Connect an instrument over USB and the window shows the live spectrum. Samundra speaks to the spectrometer directly using Apple's `IOUSBHost` framework, so no vendor drivers or third-party libraries are required. It is free and open source.
 
@@ -35,7 +32,7 @@ An Ocean Optics HR4000 or HR4000CG connected by USB, and macOS 14 or later.
 
 ## Support
 
-Samundra is free and open source under the Apache 2.0 licence. Please discuss and register issues on [GitHub](https://github.com/twarge/samundra).
+Samundra is free and open source under the Apache 2.0 licence. Please discuss and register issues on [GitHub](https://github.com/twarge/samundra/issues).
 
 Atomic line identifications use data extracted from the [NIST Atomic Spectra Database](https://physics.nist.gov/asd): Kramida, A., Ralchenko, Yu., Reader, J., and NIST ASD Team, National Institute of Standards and Technology.
 

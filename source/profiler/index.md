@@ -38,4 +38,4 @@ On macOS, set Image Capture's *Connecting this camera opens:* to **No applicatio
 
 ## Support
 
-Profiler is free and open source under the Apache 2.0 licence. Please discuss and register issues on [GitHub](https://github.com/twarge/profiler).
+Profiler is free and open source under the Apache 2.0 licence. Please discuss and register issues on [GitHub](https://github.com/twarge/profiler/issues).
