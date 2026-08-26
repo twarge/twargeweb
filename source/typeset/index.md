@@ -108,4 +108,4 @@ It all fits on iPhone, too. Write your document, preview, and manage the files i
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/typeset). If you're feeling generous, consider supporting [Typst](https://typst.app/pricing/) directly by purchasing their web service or via [GitHub Sponsor](https://github.com/sponsors/typst).
+Please discuss and register issues on [GitHub](https://github.com/twarge/typeset/issues). If you're feeling generous, consider supporting [Typst](https://typst.app/pricing/) directly by purchasing their web service or via [GitHub Sponsor](https://github.com/sponsors/typst).

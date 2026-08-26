@@ -5,6 +5,12 @@ title: SnapScan
 
 # SnapScan
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/snapscan-document-scanner/id6796118741?mt=12">
+    <img class="appstore-badge" alt="Download SnapScan on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 SnapScan scans paper on a Fujitsu ScanSnap iX500 and saves it as a PDF. Load the feeder, press Scan — in the app or on the scanner itself — and the pages land in a folder you chose, straightened, upright, and sized to the paper they came from.
 
 ![The SnapScan window with a two-page scan](/{{page.file.parent}}/SnapScan-Main.avif)

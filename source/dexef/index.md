@@ -39,4 +39,4 @@ It fits on iPhone, too. The drawing fills the screen edge to edge, the grid read
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/dexef).
+Please discuss and register issues on [GitHub](https://github.com/twarge/dexef/issues).

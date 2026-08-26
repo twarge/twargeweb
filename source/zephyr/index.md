@@ -5,13 +5,11 @@ title: Zephyr
 
 # Zephyr
 
-<!-- App Store badge — fill in the app id once the listing is live.
 <p style="text-align:center;">
-  <a href="https://apps.apple.com/us/app/zephyr/idTODO">
+  <a href="https://apps.apple.com/us/app/zephyr-for-zulip/id6799832919?mt=12">
     <img class="appstore-badge" alt="Download Zephyr on the App Store" src="/img/app-store-badge.svg">
   </a>
 </p>
--->
 
 Zephyr is a [Zulip](https://zulip.com) client for Mac, iPad, and iPhone. Zulip is a discussion system where conversations are organized by topics.
 
@@ -77,4 +75,4 @@ The same channels, conversations, and search, on iPhone.
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/zephyr).
+Please discuss and register issues on [GitHub](https://github.com/twarge/zephyr/issues).

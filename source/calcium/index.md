@@ -5,6 +5,12 @@ title: Calcium
 
 # Calcium
 
+<p style="text-align:center;">
+  <a href="https://apps.apple.com/us/app/calcium-text-calculator/id6795935652?mt=12">
+    <img class="appstore-badge" alt="Download Calcium on the App Store" src="/img/app-store-badge.svg">
+  </a>
+</p>
+
 <style>
   @font-face {
     font-family: "Fira Code";

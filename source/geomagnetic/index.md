@@ -5,14 +5,11 @@ title: Geomagnetic
 
 # Geomagnetic
 
-<!--
-App Store badge — uncomment and set the app's ID once Geomagnetic is published.
 <p style="text-align:center;">
-  <a href="https://apps.apple.com/us/app/geomagnetic/idXXXXXXXXXX?mt=12">
+  <a href="https://apps.apple.com/us/app/geomagnetic-observatory/id6783194320?mt=12">
     <img class="appstore-badge" alt="Download Geomagnetic on the App Store" src="/img/app-store-badge.svg">
   </a>
 </p>
--->
 
 Geomagnetic plots live data from the world's magnetic observatories on Apple devices. Pick a station and monitor Earth's magnetic field: both its total intensity and vector components. It downloads only the slice of data you are looking at, and only the minutes it doesn't already have, so it stays quick and keeps working offline once data is cached. It is free and open source, and draws on the [INTERMAGNET](https://intermagnet.org) network of observatories.
 
@@ -73,4 +70,4 @@ Geomagnetic runs on Apple Watch as a standalone app — your observatory's field
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/geomagnetic).
+Please discuss and register issues on [GitHub](https://github.com/twarge/geomagnetic/issues).

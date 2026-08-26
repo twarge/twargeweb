@@ -45,4 +45,4 @@ It fits on iPhone, too. The model fills the screen edge to edge, and the inspect
 
 ## Support
 
-Please discuss and register issues on [GitHub](https://github.com/twarge/stairstep).
+Please discuss and register issues on [GitHub](https://github.com/twarge/stairstep/issues).
