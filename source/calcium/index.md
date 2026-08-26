@@ -96,6 +96,7 @@ title: Calcium
     z-index: 0;
   }
   .calcium-frame .prose   { color: #86868b; }
+  .calcium-frame .raw     { color: #86868b; }
   .calcium-frame .heading { font-weight: 700; }
   .calcium-frame .comment { color: #61788f; }
   .calcium-frame .answer  { color: #86868b; }
