@@ -46,7 +46,7 @@ What you can say:
 - **Panes, sheets and layers**: "show the board", "show 3D", "show both", "hide the 3D view", "sheet 3", "the ADC sheet", "next sheet", "show the top layer", "top silkscreen", "bottom routing", "all layers", "copper only". "Show the bottom" turns the board over — the placement view of that side, mirrored — and framing a part on the far side of a sided view turns the board over to it.
 - **Clear the highlight, clear the selection, undo, redo.**
 
-Transcription pads a request with words that were not said, so "zoom to xyz C 50" still finds C50. When several things match, Horizontal reads them back ("123 could be C123, R123") rather than guessing, and a name nobody has is said back with its kind ("there is no capacitor 7 in this project"). The transcript and each outcome appear over the canvas as it listens.
+Transcription pads a request with words that were not said, so "zoom to xyz C 50" still finds C50; a verb is understood in any form it comes out ("highlights C113", "selected R12", "went to U3"), and a word in the way between the verb and the name ("highlight what C113", "zoom to, um, U3") is passed over. A pause after the verb is fine too: "highlight what", then "C113", is one request. When several things match, Horizontal reads them back ("123 could be C123, R123") rather than guessing, and a name nobody has is said back with its kind ("there is no capacitor 7 in this project"). The transcript and each outcome appear over the canvas as it listens.
 
 Siri keeps three general requests that need nothing published: "show the board in Horizontal" (or the schematic, 3D, and any combination), "start listening in Horizontal", which opens the app and turns its own microphone on, and "stop listening in Horizontal".
 
