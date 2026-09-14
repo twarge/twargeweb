@@ -13,7 +13,7 @@ title: Horizontal
 
 > Horizontal is a work in progress. It is not finished software and should not be used for production work. Keep backups of anything you open with it.
 
-Horizontal is a PCB design tool for macOS and iPadOS. It opens `.hprj` and `.horizontal` projects and shows the schematic and the board.
+Horizontal is a PCB design tool for macOS, iPadOS, and iOS. It opens `.hprj` and `.horizontal` projects and shows the schematic and the board.
 
 ![Horizontal on macOS](/{{page.file.parent}}/Horizontal-macOS.avif)
 
@@ -51,6 +51,22 @@ Transcription pads a request with words that were not said, so "zoom to xyz C 50
 Siri keeps three general requests that need nothing published: "show the board in Horizontal" (or the schematic, 3D, and any combination), "start listening in Horizontal", which opens the app and turns its own microphone on, and "stop listening in Horizontal".
 
 Selection is one thing in every view: click a part on the board, on its symbol in the schematic, or on its model in the 3D view, and it is selected in all three.
+
+## iPhone
+
+The same project opens on iPhone. The toolbar along the bottom switches between the sheet list, the schematic, the board, and the 3D view, with the microphone at its left, and the layer, grid, and fit controls sit over the canvas. Say "highlight C113 and C509" and both parts light up on the board, with the transcript and what came of it shown beneath.
+
+<div style="display:flex; flex-wrap:wrap; gap:1em; justify-content:center; margin:1.5em 0;">
+  <div style="flex:1 1 12em; max-width:16em;">
+    <img src="/{{page.file.parent}}/Horizontal-iPhone-Schematic.avif" alt="The schematic on iPhone: a sheet of a project, with the sheet list, schematic, board, and 3D view switches along the bottom">
+  </div>
+  <div style="flex:1 1 12em; max-width:16em;">
+    <img src="/{{page.file.parent}}/Horizontal-iPhone-Board.avif" alt="The board on iPhone, zoomed in on a QFN and its decoupling capacitors">
+  </div>
+  <div style="flex:1 1 12em; max-width:16em;">
+    <img src="/{{page.file.parent}}/Horizontal-iPhone-Voice.avif" alt="Horizontal listening on iPhone: saying highlight C 113 and C 509 has lit both capacitors on the board, with the transcript and result shown over the canvas">
+  </div>
+</div>
 
 ## Support
 
