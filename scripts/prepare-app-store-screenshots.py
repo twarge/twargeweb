@@ -3,9 +3,17 @@
 
 The script scans product folders under source/ for screenshot images, resizes
 each screenshot down to the nearest accepted App Store canvas, then centers it
-on that canvas. macOS screenshots keep transparent margins. iPhone and iPad
-screenshots use white margins, and watchOS screenshots use black margins,
-because App Store Connect rejects transparency for those platforms.
+on that canvas. macOS screenshots keep transparent margins. iPhone, iPhone Duo,
+and iPad screenshots use white margins, and watchOS screenshots use black
+margins, because App Store Connect rejects transparency for those platforms.
+
+A device screenshot exported onto a flat backdrop arrives with a border of that
+one color around the device. It is cleared inward from the corners and cropped
+away first, so the canvas margin meets the device itself rather than a box
+around it. Pass --keep-surround to leave it.
+
+The platform comes from the file or folder name: "watch", "iPhoneDuo" (or
+"iPhone-Duo", "iPhone Duo"), "iPhone", "iPad", or "macOS".
 
 Only the work that is actually needed runs: a screenshot whose generated PNG is
 already newer than its source is left untouched, so a second run over an
@@ -16,15 +24,27 @@ from __future__ import annotations
 
 import argparse
 import math
+import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+# The shared border code sits beside this script; python -I leaves this
+# directory off the path, so it is put there explicitly.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from screenshot_surround import Surround, find_surround
 
+
+# Canvases App Store Connect accepts, from Apple's screenshot specifications.
+# iPhone is "iPhone with Dynamic Island (medium display)", the one iPhone size a
+# submission must have; App Store Connect scales it for the others. iPhone Duo
+# is the outer display (1398 x 2034) and the inner one (2007 x 2853); iPad is the
+# required 13-inch display.
 APP_STORE_SIZES = {
     "macos": [(1280, 800), (1440, 900), (2560, 1600), (2880, 1800)],
-    "iphone": [(1242, 2688), (2688, 1242), (1284, 2778), (2778, 1284)],
+    "iphone": [(1179, 2556), (2556, 1179), (1206, 2622), (2622, 1206)],
+    "iphoneduo": [(1398, 2034), (2034, 1398), (2007, 2853), (2853, 2007)],
     "ipad": [(2064, 2752), (2752, 2064), (2048, 2732), (2732, 2048)],
     "watchos": [(422, 514), (410, 502), (416, 496), (396, 484), (368, 448), (312, 390)],
 }
@@ -33,11 +53,13 @@ APP_STORE_SIZES = {
 # used to fill the canvas around each centered screenshot.
 BACKGROUND_COLORS = {
     "iphone": "white",
+    "iphoneduo": "white",
     "ipad": "white",
     "watchos": "black",
 }
 
 IMAGE_EXTENSIONS = {".avif", ".heic", ".jpg", ".jpeg", ".png", ".tif", ".tiff"}
+
 
 
 def parse_args() -> argparse.Namespace:
@@ -67,6 +89,20 @@ def parse_args() -> argparse.Namespace:
         help="Regenerate screenshots, even where the existing output is up to date.",
     )
     parser.add_argument(
+        "--keep-surround",
+        action="store_true",
+        help="Keep a flat-colored border around the device instead of removing it.",
+    )
+    parser.add_argument(
+        "--surround-fuzz",
+        type=int,
+        default=5,
+        help=(
+            "Tolerance percent when matching a flat border. Defaults to 5: a dark "
+            "device rim can be only a few shades off a dark backdrop."
+        ),
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print planned outputs without writing files.",
@@ -92,8 +128,13 @@ def screenshot_sources(input_dir: Path) -> list[Path]:
 
 def platform_from_path(path: Path) -> str:
     searchable_name = " ".join(part.lower() for part in path.parts)
+    # Separators dropped, so iPhoneDuo, iPhone-Duo, and "iPhone Duo" all match.
+    # Checked before plain iPhone, whose name it contains.
+    compact_name = re.sub(r"[^a-z0-9]", "", searchable_name)
     if "watch" in searchable_name:
         return "watchos"
+    if "iphoneduo" in compact_name:
+        return "iphoneduo"
     if "iphone" in searchable_name:
         return "iphone"
     if "ipad" in searchable_name:
@@ -167,18 +208,37 @@ def existing_outputs(output_dir: Path, source: Path) -> list[Path]:
     )
 
 
-def is_up_to_date(source: Path, outputs: list[Path]) -> bool:
+def output_size(output: Path) -> tuple[int, int] | None:
+    """The canvas size an output's name records, as in Shot-appstore-1242x2688.png."""
+    match = re.search(r"-appstore-(\d+)x(\d+)$", output.stem)
+    if not match:
+        return None
+    return int(match[1]), int(match[2])
+
+
+def is_up_to_date(source: Path, outputs: list[Path], platform: str) -> bool:
     """True when exactly one output exists for this source and it is no older.
 
     More than one match means an earlier run chose a different canvas size, so
-    the superseded file still needs clearing out.
+    the superseded file still needs clearing out. An output at a size the
+    platform no longer lists -- one made before the platform had sizes of its
+    own -- is out of date whatever its age.
     """
     if len(outputs) != 1:
+        return False
+    if output_size(outputs[0]) not in APP_STORE_SIZES[platform]:
         return False
     return outputs[0].stat().st_mtime >= source.stat().st_mtime
 
 
-def convert_screenshot(magick: str, source: Path, output: Path, platform: str, target: tuple[int, int]) -> None:
+def convert_screenshot(
+    magick: str,
+    source: Path,
+    output: Path,
+    platform: str,
+    target: tuple[int, int],
+    surround: Surround | None,
+) -> None:
     target_width, target_height = target
     background = BACKGROUND_COLORS.get(platform, "none")
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -188,6 +248,7 @@ def convert_screenshot(magick: str, source: Path, output: Path, platform: str, t
         str(source),
         "-alpha",
         "set",
+        *(surround.arguments if surround else []),
         "-resize",
         f"{target_width}x{target_height}>",
         "-background",
@@ -228,20 +289,25 @@ def main() -> int:
 
     for source in sources:
         outputs = existing_outputs(output_dir, source)
+        platform = platform_from_path(source)
 
-        if is_up_to_date(source, outputs) and not args.force:
+        if is_up_to_date(source, outputs, platform) and not args.force:
             skipped += 1
             print(f"skip: {outputs[0].name} is already up to date")
             continue
 
-        platform = platform_from_path(source)
         width, height = image_size(magick, source)
+        size_note = f"{width}x{height}"
+        surround = None if args.keep_surround else find_surround(magick, source, args.surround_fuzz)
+        if surround:
+            width, height = surround.width, surround.height
+            size_note += f", {width}x{height} inside its border"
         target = choose_target(platform, width, height)
         output = output_path(output_dir, source, target)
         background = BACKGROUND_COLORS.get(platform, "transparent")
         print(
             f"{source} -> {output} "
-            f"({platform}, {width}x{height} -> {target[0]}x{target[1]}, {background})"
+            f"({platform}, {size_note} -> {target[0]}x{target[1]}, {background})"
         )
 
         # An earlier run may have picked a different canvas for this screenshot.
@@ -254,7 +320,7 @@ def main() -> int:
         if args.dry_run:
             continue
 
-        convert_screenshot(magick, source, output, platform, target)
+        convert_screenshot(magick, source, output, platform, target, surround)
         for path in superseded:
             path.unlink()
 

@@ -10,19 +10,27 @@ white made transparent, so they sit on the page background instead of on a white
 block. The white is flood filled inward from the four corners rather than
 matched across the whole image, which keeps white that belongs to the screenshot
 itself -- a document page inside the device stays white.
+
+A device screenshot on a flat backdrop of another color -- a dark one, say -- has
+that border cleared from the corners too, and is cropped to the device, so a
+speck of capture debris at the edge goes with it. It is left alone unless the
+backdrop shows on every side and clearing it leaves the device as one solid
+region, which keeps a bare screenshot whose own background reaches its corners
+intact. Pass --keep-surround to leave such a border.
 """
 
 from __future__ import annotations
 
 import argparse
-import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-
-PIXEL_NUMBER = re.compile(r"\d+(?:\.\d+)?")
+# The shared border code sits beside this script; python -I leaves this
+# directory off the path, so it is put there explicitly.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from screenshot_surround import find_surround, probe_corners
 
 
 def parse_args() -> argparse.Namespace:
@@ -69,6 +77,20 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--keep-surround",
+        action="store_true",
+        help="Keep a flat border of any other color around the device instead of removing it.",
+    )
+    parser.add_argument(
+        "--surround-fuzz",
+        type=int,
+        default=5,
+        help=(
+            "Tolerance percent when matching a flat border of another color. "
+            "Defaults to 5: a dark device rim can be only a few shades off a dark backdrop."
+        ),
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print planned replacements without writing or deleting files.",
@@ -98,33 +120,6 @@ def png_sources(source_dir: Path) -> list[Path]:
 
 def temporary_avif_path(target: Path) -> Path:
     return target.with_name(f".{target.stem}.tmp.avif")
-
-
-def probe_image(magick: str, path: Path) -> tuple[int, int, list[tuple[float, ...]]]:
-    """Return the size and the four corner pixels in one ImageMagick call."""
-    result = subprocess.run(
-        [
-            magick,
-            str(path),
-            "-depth",
-            "8",
-            "-format",
-            "%w %h|%[pixel:p{0,0}]|%[pixel:p{%[fx:w-1],0}]"
-            "|%[pixel:p{0,%[fx:h-1]}]|%[pixel:p{%[fx:w-1],%[fx:h-1]}]",
-            "info:",
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-
-    size_field, *corner_fields = result.stdout.strip().split("|")
-    width, height = (int(value) for value in size_field.split())
-    corners = [
-        tuple(float(number) for number in PIXEL_NUMBER.findall(field))
-        for field in corner_fields
-    ]
-    return width, height, corners
 
 
 def is_white_corner(pixel: tuple[float, ...], fuzz: int) -> bool:
@@ -216,15 +211,26 @@ def main() -> int:
 
         operators: list[str] = []
         surround_note = ""
-        if not args.keep_white:
+        if not (args.keep_white and args.keep_surround):
             try:
-                width, height, corners = probe_image(magick, source)
+                width, height, corners = probe_corners(magick, source)
+                white = all(is_white_corner(corner, args.white_fuzz) for corner in corners)
+                # A white surround is handled as it always was; only another
+                # color goes through the stricter border check.
+                surround = None
+                if not white and not args.keep_surround:
+                    surround = find_surround(magick, source, args.surround_fuzz)
             except (subprocess.CalledProcessError, ValueError) as error:
                 print(f"warning: could not inspect {source}: {error}", file=sys.stderr)
             else:
-                if all(is_white_corner(corner, args.white_fuzz) for corner in corners):
+                if white and not args.keep_white:
                     operators = white_surround_arguments(width, height, args.white_fuzz)
                     surround_note = ", white surround -> transparent"
+                elif surround:
+                    operators = surround.arguments
+                    surround_note = (
+                        f", border removed, cropped to the {surround.width}x{surround.height} device"
+                    )
 
         action = "regenerating stale AVIF" if target.exists() else "creating AVIF"
         removal_note = "keeping PNG" if args.keep_png else "removing PNG"
