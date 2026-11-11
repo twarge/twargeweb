@@ -51,8 +51,8 @@ Other ScanSnap models are untested. They use a similar command set, so support m
 
 ## Support
 
-Cendatur is free and open source under the Apache 2.0 licence. Source, releases, and issues live on [GitHub](https://github.com/twarge/snapscan).
+Cendatur is free and open source under the Apache 2.0 licence. Source, releases, and issues live on [GitHub](https://github.com/twarge/cendatur).
 
-The driver was written from scratch by recording the scanner's USB traffic and documenting the protocol it speaks; that [specification](https://github.com/twarge/snapscan/blob/main/docs/PROTOCOL.md) is in the repository too, in case it's useful to anyone else with a ScanSnap and an afternoon.
+The driver was written from scratch by recording the scanner's USB traffic and documenting the protocol it speaks; that [specification](https://github.com/twarge/cendatur/blob/main/docs/PROTOCOL.md) is in the repository too, in case it's useful to anyone else with a ScanSnap and an afternoon.
 
 Cendatur is an independent product and is not affiliated with, endorsed by, or sponsored by Fujitsu, PFU, or Ricoh.
