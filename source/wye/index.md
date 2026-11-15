@@ -5,11 +5,9 @@ title: Wye
 
 # Wye
 
-Wye is a git client for Mac, iPad, and iPhone. It shows a repository's history as a graph, stages and commits changes down to single lines, and fetches, pulls, and pushes over HTTPS and SSH. It is free and open source, and the same app runs on all three.
+Wye is a git client for Mac, iPad, and iPhone. It shows a repository's history as a graph, stages and commits changes down to single lines, and fetches, pulls, and pushes over HTTPS and SSH. It is free and open source.
 
 ![Wye on macOS: the history graph beside a commit and its diff](/{{page.file.parent}}/Wye-macOS.avif)
-
-Wye is in development and is not on the App Store yet. Everything below works now, in the current source.
 
 Wye does not run the `git` command. It reads and writes repositories itself, through [libgit2](https://libgit2.org), so it works inside the App Store sandbox and on iPhone and iPad, where there is no command line to call. It does not run hooks, and it never reads `~/.gitconfig` or `~/.ssh`: its settings are its own, and keys and tokens are kept in the Keychain.
 
